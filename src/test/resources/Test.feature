@@ -1,4 +1,4 @@
-Feature: Testing pricemesh
+Feature: Testing VoterSurvey
   Verifing Scenarios for VoterSurvey Website
 
 
