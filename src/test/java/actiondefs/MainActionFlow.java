@@ -19,8 +19,14 @@ public class MainActionFlow {
 	String title;
 	String expectedWebsiteName = "VotersSurvey";
 	String BaseUrl = "http://bit.ly/votersurveybooth";
+
 	String groupedStringCountBefore;
 	int groupedintCountBefore;
+
+	int countToValidateWith;
+
+	String groupedStringCountAfter;
+	int groupedintCountAfter;
 
 	String voterSurveyIDOnClick;
 	String voterDataForValidation;
@@ -55,6 +61,8 @@ public class MainActionFlow {
 			"//body/app-root/app-layout/app-voters-list/app-party-modal/div[@class='card']/div[@class='card-body']/div[@class='others']/div[@class='section']/label[1]/span[1]");
 	By saveButtonAfterGrouping = By.xpath("//div[@class='card-body']//button[@class='group-btn']");
 	By reportButton = By.xpath("//button[@class='mat-focus-indicator mat-button mat-button-base']");
+
+	By backbuttonafterGrouping = By.xpath("//div[@class='back-arrow']");
 
 	CommonActionFlow CommonPage = new CommonActionFlow();
 
@@ -276,6 +284,55 @@ public class MainActionFlow {
 		} catch (Exception e) {
 			return false;
 
+		}
+
+	}
+
+	public void clickBackButton() {
+
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 50);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(backbuttonafterGrouping));
+			driver.findElement(backbuttonafterGrouping).click();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
+
+	public void assertCountAfterGrouping() {
+
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 50);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(groupedcountforFirstStreet));
+			groupedStringCountAfter = driver.findElement(groupedcountforFirstStreet).getText();
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		System.out.println("Count Before" + " = " + groupedintCountBefore);
+		countToValidateWith = groupedintCountBefore ;
+		System.out.println("Count to validate with" + " = " + countToValidateWith);
+
+		groupedintCountAfter = Integer.parseInt(groupedStringCountAfter);
+		System.out.println("Count After" + " = " + groupedintCountAfter);
+
+	}
+
+	public void countAssertAfterGrouping(){
+		Boolean value = assertCount();
+		assertTrue(value);
+		
+	}
+
+	public boolean assertCount() {
+
+		if (groupedintCountAfter == countToValidateWith) {
+			return true;
+		}
+		else{
+			return false;
 		}
 
 	}

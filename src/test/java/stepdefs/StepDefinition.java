@@ -74,37 +74,37 @@ public class StepDefinition extends MainActionFlow {
 		MNF.clickcountineAfterSelectingParty();
 		MNF.selectingReligion();
 		MNF.save();
-		
+
 	}
 
 	@Then("^Select any of the Street in the List$")
-	public void select_any_of_the_Street_in_the_List(){
+	public void select_any_of_the_Street_in_the_List() {
 		MNF.getgroupedCount();
 		MNF.selectStreet();
 	}
 
 	@Then("^Select any one of the Voter in the List$")
-	public void select_any_one_of_the_Voter_in_the_List(){
+	public void select_any_one_of_the_Voter_in_the_List() {
 		MNF.selectingVoterData();
 	}
 
 	@Then("^Click grouping button after selecting voter$")
-	public void click_grouping_button_after_selecting_voter(){
+	public void click_grouping_button_after_selecting_voter() {
 		MNF.clickGroupingButton();
 	}
 
 	@Then("^Choose party for the selected voter$")
-	public void choose_party_for_the_selected_voter(){
+	public void choose_party_for_the_selected_voter() {
 		MNF.selectingParty();
 	}
 
 	@Then("^Click countinue after choosing party for the voter$")
-	public void click_countinue_after_choosing_party_for_the_voter(){
+	public void click_countinue_after_choosing_party_for_the_voter() {
 		MNF.clickcountineAfterSelectingParty();
 	}
 
 	@Then("^Choose religion for the selected voter$")
-	public void choose_religion_for_the_selected_voter(){
+	public void choose_religion_for_the_selected_voter() {
 		MNF.selectingReligion();
 	}
 
@@ -113,10 +113,25 @@ public class StepDefinition extends MainActionFlow {
 		MNF.save();
 	}
 
-
 	@Then("^Assert grouped voter$")
-	public void assert_grouped_Voter(){
+	public void assert_grouped_Voter() {
 		MNF.assertSelectedVoter();
+
+	}
+
+	@Then("^Click back button$")
+	public void click_back_button() {
+		MNF.clickBackButton();
+	}
+
+	@Then("^Get count of total grouped count after grouping$")
+	public void get_count_of_total_Grouped_count_after_grouping() {
+		MNF.assertCountAfterGrouping();
+	}
+
+	@Then("^Assert Count$")
+	public void assert_count() {
+		MNF.countAssertAfterGrouping();
 
 	}
 

@@ -19,6 +19,9 @@ Feature: Testing pricemesh
     Then Choose religion for the selected voter
     Then Click save after selecting party and religion for the voter
     Then Assert grouped voter
+    Then Click back button
+    Then Get count of total grouped count after grouping
+    Then Assert Count
     Then Quit from the Website
 
     Examples:
