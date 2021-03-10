@@ -19,6 +19,18 @@ public class MainActionFlow {
 	String title;
 	String expectedWebsiteName = "VotersSurvey";
 	String BaseUrl = "http://bit.ly/votersurveybooth";
+	String gender;
+	int totalNumberOfPartiesPresent;
+	int numberChangeParty;
+	int i = 1;
+	int n = 13;
+
+	int x = 1;
+	int y = 3;
+
+	String a;
+	String s;
+	String d;
 
 	String groupedStringCountBefore;
 	int groupedintCountBefore;
@@ -60,7 +72,10 @@ public class MainActionFlow {
 	By religionListSelectFirst = By.xpath(
 			"//body/app-root/app-layout/app-voters-list/app-party-modal/div[@class='card']/div[@class='card-body']/div[@class='others']/div[@class='section']/label[1]/span[1]");
 	By saveButtonAfterGrouping = By.xpath("//div[@class='card-body']//button[@class='group-btn']");
+
 	By reportButton = By.xpath("//button[@class='mat-focus-indicator mat-button mat-button-base']");
+	By totalNumberOfPartiesInReport = By.xpath("//body//app-root//li");
+	By selectPartiesInReport = By.xpath("//body//app-root//li[" + numberChangeParty + "]");
 
 	By backbuttonafterGrouping = By.xpath("//div[@class='back-arrow']");
 
@@ -312,7 +327,7 @@ public class MainActionFlow {
 		}
 
 		System.out.println("Count Before" + " = " + groupedintCountBefore);
-		countToValidateWith = groupedintCountBefore ;
+		countToValidateWith = groupedintCountBefore;
 		System.out.println("Count to validate with" + " = " + countToValidateWith);
 
 		groupedintCountAfter = Integer.parseInt(groupedStringCountAfter);
@@ -320,21 +335,97 @@ public class MainActionFlow {
 
 	}
 
-	public void countAssertAfterGrouping(){
+	public void countAssertAfterGrouping() {
 		Boolean value = assertCount();
 		assertTrue(value);
-		
+
 	}
 
 	public boolean assertCount() {
 
 		if (groupedintCountAfter == countToValidateWith) {
 			return true;
-		}
-		else{
+		} else {
 			return false;
 		}
 
+	}
+
+	public void reportButtonClick() {
+
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 50);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(reportButton));
+			driver.findElement(reportButton).click();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
+
+	public void toGetPartiesInReport() {
+
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 50);
+			wait.until(ExpectedConditions.visibilityOfElementLocated(totalNumberOfPartiesInReport));
+			totalNumberOfPartiesPresent = driver.findElements(totalNumberOfPartiesInReport).size();
+			System.out.println(totalNumberOfPartiesPresent);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+	}
+
+	public void click13PartyInLoop() {
+
+		for (i = 1; i <= n; i++) {
+
+			// WebElement partyClick =
+			// driver.findElement(By.xpath("//body//app-root//li["+i+"]"));
+
+			System.out.println("Party" + " = " + i);
+
+			try {
+				WebDriverWait wait = new WebDriverWait(driver, 50);
+				wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//body//app-root//li[" + i + "]")));
+				driver.findElement(By.xpath("//body//app-root//li[" + i + "]")).click();
+				// System.out.println(totalNumberOfPartiesPresent);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+
+			for (x = 1; x <= y; x++) {
+
+				try {
+
+					if (x == 1) {
+						gender = "Male";
+					} else if (x == 2) {
+						gender = "Female";
+					} else if (x == 3) {
+						gender = "Others";
+					}
+
+					WebDriverWait wait = new WebDriverWait(driver, 50);
+					wait.until(ExpectedConditions
+							.visibilityOfElementLocated(By.xpath("//body//app-root//button[" + x + "]//span//span")));
+					a = driver.findElement(By.xpath("//body//app-root//button[" + x + "]//span//span")).getText();
+					System.out.println("Number of count for " + gender + " = " + a);
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+				}
+
+			}
+
+			try {
+				WebDriverWait wait = new WebDriverWait(driver, 50);
+				wait.until(ExpectedConditions.visibilityOfElementLocated(backbuttonafterGrouping));
+				driver.findElement(backbuttonafterGrouping).click();
+				// System.out.println(totalNumberOfPartiesPresent);
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+
+		}
 	}
 
 	public void QuitBrowser() {

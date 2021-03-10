@@ -135,6 +135,21 @@ public class StepDefinition extends MainActionFlow {
 
 	}
 
+	@Then("^Click Report$")
+	public void click_report() {
+		MNF.reportButtonClick();
+	}
+
+	@Then("^Get number of parties listed in ReportPage$")
+	public void get_number_of_parties_listed_in_reportPage() {
+		MNF.toGetPartiesInReport();
+	}
+
+	@Then("^Click 13 parties in Loop$")
+	public void click_13_parties_in_loop() {
+		MNF.click13PartyInLoop();
+	}
+
 	@Then("^Quit from the Website$")
 	public void Quit_From_theWebsite() {
 		System.out.println("Quitting the Browser..........");

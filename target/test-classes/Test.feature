@@ -25,8 +25,29 @@ Feature: Testing VoterSurvey
     Then Quit from the Website
 
     Examples:
-      | Website   |
+      | Website     |
       | VoterSurvey |
+
+
+  @ReportPage
+  Scenario Outline: Voter survey automation test
+    Given Launch chrome Browser for votersurvey Website
+    Then Enter mobile number
+    Then Click next in mobileNumber Page
+    Then Click countinue in 2nd Page
+    Then Enter verificationCode
+    Then Click countinue for verificationCode
+    Then Click Report
+    Then Get number of parties listed in ReportPage
+    Then Click 13 parties in Loop
+    Then Quit from the Website
+
+    Examples:
+      | Website     |
+      | VoterSurvey |
+
+
+
 
 
 
